@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AD340</string>
+    <string name="my_name">Justin Simmons</string>
+    <string name="lblFact1">Fun Fact #1</string>
+    <string name="lblFact2">Fun Fact #2</string>
+    <string name="lblFact3">Fun Fact #3</string>
+</resources>
