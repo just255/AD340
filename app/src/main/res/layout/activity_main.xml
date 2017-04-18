@@ -6,33 +6,43 @@
     android:layout_height="match_parent"
     tools:context="com.justinsimmons.myapplication.MainActivity">
 
-    <EditText
-        android:id="@+id/lblFunFact3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
-        android:inputType="none"
-        android:text="@string/lblFact3"
-        android:textAlignment="center"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtFact2" />
-
     <TextView
-        android:id="@+id/txtFact3"
+        android:id="@+id/lblName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="After failing my first programming class in 2005, I swore off programming completely"
-        android:textAlignment="center"
+        android:text="@string/my_name"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblFunFact3"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.032" />
 
-    <EditText
+    <TextView
+        android:id="@+id/lblFunFact1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
+        android:text="Fun Fact #1"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblName" />
+
+    <TextView
+        android:id="@+id/txtFact1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:text="Huge Tennessee Titans football fan"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblFunFact1" />
+
+    <TextView
         android:id="@+id/lblFunFact2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,6 +50,7 @@
         android:inputType="none"
         android:text="@string/lblFact2"
         android:textAlignment="center"
+        android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtFact1" />
@@ -57,39 +68,40 @@
         app:layout_constraintVertical_bias="0.018" />
 
     <TextView
-        android:id="@+id/lblName"
+        android:id="@+id/lblFunFact3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/my_name"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.032" />
-
-    <EditText
-        android:id="@+id/lblFunFact1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="46dp"
-        android:inputType="none"
-        android:text="@string/lblFact1"
+        android:layout_marginTop="30dp"
+        android:text="@string/lblFact3"
         android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblName"
-        app:layout_constraintHorizontal_bias="0.501" />
+        app:layout_constraintTop_toBottomOf="@+id/txtFact2" />
 
     <TextView
-        android:id="@+id/txtFact1"
+        android:id="@+id/txtFact3"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="After failing my first programming class in 2005, I swore off programming completely"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/lblFunFact3"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="8dp" />
+
+    <Button
+        android:id="@+id/btnStartMessageActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Huge Tennessee Titans football fan"
-        android:textAlignment="center"
+        android:text="Start"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblFunFact1"
-        android:layout_marginTop="1dp" />
+        app:layout_constraintTop_toBottomOf="@+id/txtFact3"
+        android:layout_marginTop="32dp" />
 
 </android.support.constraint.ConstraintLayout>
