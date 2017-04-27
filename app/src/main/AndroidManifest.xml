@@ -18,12 +18,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".MessageActivity"
+<<<<<<< HEAD
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".RecyclerActivity"
             android:parentActivityName=".RecyclerActivity"
             android:screenOrientation="portrait">
+=======
+            android:screenOrientation="portrait">
+
+>>>>>>> c492d4899338549632941637242aa1b123172914
         </activity>
     </application>
 
