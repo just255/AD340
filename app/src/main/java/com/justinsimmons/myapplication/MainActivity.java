@@ -5,14 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-<<<<<<< HEAD
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
-=======
 import android.widget.Button;
->>>>>>> c492d4899338549632941637242aa1b123172914
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-<<<<<<< HEAD
         Button btnStartMessageActivity = (Button) findViewById(R.id.btnStartMessageActivity);
         btnStartMessageActivity.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -80,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "You pressed button #4", Toast.LENGTH_SHORT).show();
                 break;
         }
-=======
         Button clickButton = (Button) findViewById(R.id.btnStartMessageActivity);
         clickButton.setOnClickListener(new View.OnClickListener() {
 
@@ -91,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
->>>>>>> c492d4899338549632941637242aa1b123172914
     }
     */
 }
