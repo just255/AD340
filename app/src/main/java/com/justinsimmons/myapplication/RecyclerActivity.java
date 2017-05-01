@@ -62,7 +62,7 @@ public class RecyclerActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
                 getApplicationContext()
         ));
-        
+
         recyclerViewAdapter = new RecyclerAdapter();
         recyclerView.setAdapter(recyclerViewAdapter);
     }
