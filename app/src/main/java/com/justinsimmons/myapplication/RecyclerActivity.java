@@ -23,26 +23,26 @@ public class RecyclerActivity extends AppCompatActivity {
     // 2D data array
     String[][] subjects =
             {
-                    { "ANDROID", "1" },
-                    { "PHP", "2" },
-                    { "JSON", "3" },
-                    { "SWIFT", "4" },
-                    { "OBJECTIVE-C", "5" },
-                    { "SQL", "6" },
-                    { "JAVA", "7" },
-                    { "JAVASCRIPT", "8" },
-                    { "REACT", "9" },
-                    { "PYTHON", "10" },
-                    { "ANGULAR", "11" },
-                    { "JQUERY", "12" },
-                    { "CANVAS", "13" },
-                    { "D3", "14" },
-                    { "MATPLOTLIB", "15" },
-                    { "NODE", "16" },
-                    { "NODE2", "17" },
-                    { "NODE3", "18" },
-                    { "NODE4", "19" },
-                    { "NODE5", "20" }
+                    { "The Dark Knight", "2008" },
+                    { "Raiders of the Lost Ark", "1981" },
+                    { "Casino Royale", "2006" },
+                    { "Terminator 2: Judgement Day", "1991" },
+                    { "The Bourne Ultimatum", "2007" },
+                    { "Mad Max: Fury Road", "2015" },
+                    { "The Matrix", "1999" },
+                    { "Aliens", "1986" },
+                    { "Mad Max 2", "1981" },
+                    { "Die Hard", "1988" },
+                    { "The Avengers", "2012" },
+                    { "The Raid: Redemption", "2011" },
+                    { "Star Wars", "1977" },
+                    { "Predator", "1987" },
+                    { "Gladiator", "2000" },
+                    { "Taken", "2008" },
+                    { "Skyfall", "2012" },
+                    { "Seven Samurai", "1954" },
+                    { "Rambo: First Blood", "1982" },
+                    { "True Lies", "1994" }
             };
 
     @Override
@@ -59,6 +59,10 @@ public class RecyclerActivity extends AppCompatActivity {
         recylerViewLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(recylerViewLayoutManager);
 
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
+                getApplicationContext()
+        ));
+        
         recyclerViewAdapter = new RecyclerAdapter();
         recyclerView.setAdapter(recyclerViewAdapter);
     }
