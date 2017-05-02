@@ -7,9 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
 import android.widget.Button;
+
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         btnStartMessageActivity.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent message = new Intent(MainActivity.this, MessageActivity.class);
+                message.putExtra("message", "This message was submitted from Main Activity");
                 startActivity(message);
             }
         });
@@ -54,39 +58,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-/*    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnStartMessageActivity:
-                Intent message = new Intent(MainActivity.this, MessageActivity.class);
-                startActivity(message);
-                break;
-            case R.id.btnRecycler:
-                Intent recycler = new Intent(MainActivity.this, RecyclerActivity.class);
-                startActivity(recycler);
-                break;
-            case R.id.btn2:
-                Toast.makeText(this, "You pressed button #2", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.btn3:
-                Toast.makeText(this, "You pressed button #3", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.btn4:
-                Toast.makeText(this, "You pressed button #4", Toast.LENGTH_SHORT).show();
-                break;
-        }
-        Button clickButton = (Button) findViewById(R.id.btnStartMessageActivity);
-        clickButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent intent = new Intent(MainActivity.this, MessageActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-    */
 }
 

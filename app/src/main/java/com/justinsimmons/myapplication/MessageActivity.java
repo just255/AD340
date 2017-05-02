@@ -1,8 +1,10 @@
 package com.justinsimmons.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * Created by just_ on 4/17/2017.
@@ -10,7 +12,6 @@ import android.util.Log;
 
 public class MessageActivity extends AppCompatActivity{
 
-    public static String lifecycle = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -18,6 +19,10 @@ public class MessageActivity extends AppCompatActivity{
         setContentView(R.layout.activity_message);
 
         lifecycleMessage("onCreate");
+
+        Intent intent = getIntent();
+        String message = intent.getStringExtra("message");
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
     @Override
     public void onStart(){
