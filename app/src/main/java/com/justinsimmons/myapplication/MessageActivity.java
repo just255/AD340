@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -21,8 +22,9 @@ public class MessageActivity extends AppCompatActivity{
         lifecycleMessage("onCreate");
 
         Intent intent = getIntent();
-        String message = intent.getStringExtra("message");
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        String message = intent.getStringExtra("job_title");
+        TextView lblJobTitle = (TextView) findViewById(R.id.lblMessageFromMain);
+        lblJobTitle.setText(message);
     }
     @Override
     public void onStart(){

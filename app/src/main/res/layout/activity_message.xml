@@ -14,4 +14,22 @@
         android:textAlignment="center"
         android:textSize="24sp" />
 
+    <TextView
+        android:id="@+id/lblJobTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblMessageActivity"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:text="Job Title From Main" />
+
+    <TextView
+        android:id="@+id/lblMessageFromMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblJobTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="TextView" />
+
 </RelativeLayout>

@@ -34,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
         btnStartMessageActivity.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent message = new Intent(MainActivity.this, MessageActivity.class);
-                message.putExtra("message", "This message was submitted from Main Activity");
+                EditText txtBox = (EditText) findViewById(R.id.editText);
+                String text = txtBox.getText().toString();
+                message.putExtra("job_title", text);
                 startActivity(message);
             }
         });
