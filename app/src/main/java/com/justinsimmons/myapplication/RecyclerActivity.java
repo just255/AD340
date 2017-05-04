@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -18,7 +20,7 @@ public class RecyclerActivity extends AppCompatActivity {
     Context context;
     RecyclerView recyclerView;
     RecyclerView.Adapter recyclerViewAdapter;
-    RecyclerView.LayoutManager recylerViewLayoutManager;
+    RecyclerView.LayoutManager recyclerViewLayoutManager;
 
     // 2D data array
     String[][] subjects =
@@ -49,15 +51,19 @@ public class RecyclerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_activity);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         context = getApplicationContext();
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        recylerViewLayoutManager = new LinearLayoutManager(context);
+        recyclerViewLayoutManager = new LinearLayoutManager(context);
 
         // use a linear layout manager
-        recylerViewLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(recylerViewLayoutManager);
+        recyclerViewLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(recyclerViewLayoutManager);
 
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
                 getApplicationContext()
@@ -66,6 +72,7 @@ public class RecyclerActivity extends AppCompatActivity {
         recyclerViewAdapter = new RecyclerAdapter();
         recyclerView.setAdapter(recyclerViewAdapter);
     }
+
     public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
@@ -97,6 +104,8 @@ public class RecyclerActivity extends AppCompatActivity {
         public void onBindViewHolder(ViewHolder holder, int position) {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
+            Log.d("PLACES", "subjects equals " + subjects[position][0]);
+            Log.d("PLACES", "subjects equals " + subjects[position][1]);
             holder.mTitle.setText(subjects[position][0]);
             holder.mDetail.setText(subjects[position][1]);
         }

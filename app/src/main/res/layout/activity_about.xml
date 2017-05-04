@@ -14,8 +14,14 @@
         android:theme="@style/Theme.AppCompat.DayNight"
         app:popupTheme="@style/Theme.AppCompat.DayNight" />
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/lblAbout"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/recyclerView"/>
+        android:layout_gravity="center"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="50dp"
+        android:textAlignment="center" />
 </LinearLayout>
