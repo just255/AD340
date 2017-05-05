@@ -14,23 +14,30 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".MessageActivity"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".RecyclerActivity"
             android:label="Best Action Movies"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".AboutActivity"
             android:label="About"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
     </application>
 </manifest>

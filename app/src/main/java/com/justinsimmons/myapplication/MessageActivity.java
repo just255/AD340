@@ -1,10 +1,16 @@
 package com.justinsimmons.myapplication;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,7 +66,47 @@ public class MessageActivity extends AppCompatActivity{
     public static void lifecycleMessage(String lifecycle){
         Log.d("ACTIVITY LIFECYCLE", lifecycle);
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        // Hide menu item
+        invalidateOptionsMenu();
+        MenuItem about = menu.findItem(R.id.message_item);
+        about.setVisible(false);
 
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.about_item:
+                intent = new Intent(MessageActivity.this, AboutActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.message_item:
+                intent = new Intent(MessageActivity.this, MessageActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.movies_item:
+                intent = new Intent(MessageActivity.this, RecyclerActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
 }
 
 
