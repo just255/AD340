@@ -34,6 +34,7 @@ public class MessageActivity extends AppCompatActivity{
 
         Intent intent = getIntent();
         String message = intent.getStringExtra("job_title");
+        Log.d("MESSAGE : ", message);
         TextView lblJobTitle = (TextView) findViewById(R.id.lblMessageFromMain);
         lblJobTitle.setText(message);
     }

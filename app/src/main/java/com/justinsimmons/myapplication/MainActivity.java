@@ -49,48 +49,31 @@ public class MainActivity extends AppCompatActivity {
         Button btnStartMessageActivity = (Button) findViewById(R.id.btnStartMessageActivity);
         btnStartMessageActivity.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                final Intent message = new Intent(MainActivity.this, MessageActivity.class);
+                EditText txtBox = (EditText) findViewById(R.id.editText);
+                String text = txtBox.getText().toString();
+                message.putExtra("job_title", text);
                 final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("Continue to Message Activity?")
                         .setItems(dialogItems, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent message = new Intent(MainActivity.this, MessageActivity.class);
                                 // Handle item selection
-                                    switch (which) {
-                                        case 0:
-                                            Intent intent = new Intent(MainActivity.this, MessageActivity.class);
-                                            EditText txtBox = (EditText) findViewById(R.id.editText);
-                                            String text = txtBox.getText().toString();
-                                            message.putExtra("job_title", text);
-                                            startActivity(intent);
-                                            Log.d("DIALOG", "User selected Yes");
-                                            break;
-                                        case 1:
-                                            Log.d("DIALOG", "User selected No");
-                                            break;
-                                        case 2:
-                                            Log.d("DIALOG", "User really likes the dialog screen");
-                                            AlertDialog dialog1 = builder.create();
-                                            dialog1.show();
-                                    }
+                                switch (which) {
+                                    case 0:
+                                        startActivity(message);
+                                        Log.d("DIALOG", "User selected Yes");
+                                        break;
+                                    case 1:
+                                        Log.d("DIALOG", "User selected No");
+                                        break;
+                                    case 2:
+                                        Log.d("DIALOG", "User really likes the dialog screen");
+                                        AlertDialog dialog1 = builder.create();
+                                        dialog1.show();
+                                }
                             }
                         });
-/*                builder.setMessage("Continue?")
-                        .setTitle("Confirm Action");
-                // Add the buttons
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User clicked OK button
-                        Log.d("DIALOG", "User selected Yes");
-                        startActivity(message);
-                    }
-                });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
-                        Log.d("DIALOG", "User selected No");
-                    }
-                });
-*/              AlertDialog dialog = builder.create();
+                AlertDialog dialog = builder.create();
                 dialog.show();
             }
         });
