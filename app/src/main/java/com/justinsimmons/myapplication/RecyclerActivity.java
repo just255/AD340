@@ -17,6 +17,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by just_ on 4/26/2017.
  */
@@ -28,6 +41,9 @@ public class RecyclerActivity extends AppCompatActivity {
     RecyclerView.Adapter recyclerViewAdapter;
     RecyclerView.LayoutManager recyclerViewLayoutManager;
 
+    String[][] subjects = new String[20][2];
+
+/*
     // 2D data array
     String[][] subjects =
             {
@@ -52,7 +68,7 @@ public class RecyclerActivity extends AppCompatActivity {
                     { "Rambo: First Blood", "1982" },
                     { "True Lies", "1994" }
             };
-
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +93,59 @@ public class RecyclerActivity extends AppCompatActivity {
 
         recyclerViewAdapter = new RecyclerAdapter();
         recyclerView.setAdapter(recyclerViewAdapter);
+//--------------------------Volley Request-----------------------------------//
+        final TextView mTextView = (TextView) findViewById(R.id.txtRequest);
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="http://jsimmons.icoolshow.net/movies.json";
+
+        JsonArrayRequest jsObjRequest = new JsonArrayRequest(url,new Response.Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            String jsonResponse = "";
+                            for (int i = 0; i < response.length(); i++){
+                                JSONObject movies = (JSONObject) response.get(i);
+                                String movie = movies.getString("movie");
+                                String year = movies.getString("year");
+                                subjects[i][0] = movie;
+                                subjects[i][1] = year;
+                                jsonResponse += movie + " ";
+                                jsonResponse += year;
+                            }
+                            mTextView.setText(jsonResponse);
+                        } catch (JSONException e){
+                            e.getStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO Auto-generated method stub
+
+                    }
+                });
+        /*
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        mTextView.setText("Response is: "+ response.substring(0,500));
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                mTextView.setText("That didn't work!");
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(jsObjRequest);*/
+        MySingleton.getInstance(this).addToRequestQueue(jsObjRequest);
     }
 
     public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {

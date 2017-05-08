@@ -4,12 +4,16 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.LruCache;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,6 +24,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.Volley;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
             "No",
             "I Like This Popup"};
 
+    private static final String DEBUG_TAG = "NetworkStatusExample";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         // Prevents keyboard from auto popping up
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
 
         Button btnStartMessageActivity = (Button) findViewById(R.id.btnStartMessageActivity);
         btnStartMessageActivity.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                                         break;
                                     case 2:
                                         Log.d("DIALOG", "User really likes the dialog screen");
+                                        // Reopens the alert dialog
                                         AlertDialog dialog1 = builder.create();
                                         dialog1.show();
                                 }
@@ -91,6 +102,17 @@ public class MainActivity extends AppCompatActivity {
                 if (web[position].equals("Recycler View")){
                     Intent recycler = new Intent(MainActivity.this, RecyclerActivity.class);
                     startActivity(recycler);
+                    // Get connection status of network
+                    ConnectivityManager connMgr = (ConnectivityManager)
+                            getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo networkInfo = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                    boolean isWifiConn = networkInfo.isConnected();
+                    networkInfo = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+                    boolean isMobileConn = networkInfo.isConnected();
+                    boolean isConnected = isOnline();
+                    Log.d(DEBUG_TAG, "Wifi connected: " + isWifiConn);
+                    Log.d(DEBUG_TAG, "Mobile connected: " + isMobileConn);
+                    Log.d(DEBUG_TAG, "Network connected: " + isConnected);
                 }
 
             }
@@ -131,6 +153,13 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
     }
 }
 
