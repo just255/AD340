@@ -35,12 +35,10 @@ import org.json.JSONObject;
  */
 
 public class RecyclerActivity extends AppCompatActivity {
-
     Context context;
     RecyclerView recyclerView;
     RecyclerView.Adapter recyclerViewAdapter;
     RecyclerView.LayoutManager recyclerViewLayoutManager;
-
     String[][] subjects = new String[20][2];
 
 /*
@@ -78,22 +76,7 @@ public class RecyclerActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        context = getApplicationContext();
-
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        recyclerViewLayoutManager = new LinearLayoutManager(context);
-
-        // use a linear layout manager
-        recyclerViewLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(recyclerViewLayoutManager);
-
-        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
-                getApplicationContext()
-        ));
-
-        recyclerViewAdapter = new RecyclerAdapter();
-        recyclerView.setAdapter(recyclerViewAdapter);
-//--------------------------Volley Request-----------------------------------//
+        //--------------------------Volley Request-----------------------------------//
         final TextView mTextView = (TextView) findViewById(R.id.txtRequest);
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -101,33 +84,48 @@ public class RecyclerActivity extends AppCompatActivity {
 
         JsonArrayRequest jsObjRequest = new JsonArrayRequest(url,new Response.Listener<JSONArray>() {
 
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            String jsonResponse = "";
-                            for (int i = 0; i < response.length(); i++){
-                                JSONObject movies = (JSONObject) response.get(i);
-                                String movie = movies.getString("movie");
-                                String year = movies.getString("year");
-                                subjects[i][0] = movie;
-                                subjects[i][1] = year;
-                                jsonResponse += movie + " ";
-                                jsonResponse += year;
-                            }
-                            mTextView.setText(jsonResponse);
-                        } catch (JSONException e){
-                            e.getStackTrace();
-                        }
-
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    String jsonResponse = "";
+                    for (int i = 0; i < response.length(); i++){
+                        JSONObject movies = (JSONObject) response.get(i);
+                        String movie = movies.getString("movie");
+                        String year = movies.getString("year");
+                        subjects[i][0] = movie;
+                        subjects[i][1] = year;
+                        jsonResponse += movie + " ";
+                        jsonResponse += year;
                     }
-                }, new Response.ErrorListener() {
+                    mTextView.setText(jsonResponse);
+                    context = getApplicationContext();
 
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
+                    recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+                    recyclerViewLayoutManager = new LinearLayoutManager(context);
 
-                    }
-                });
+                    // use a linear layout manager
+                    recyclerViewLayoutManager = new LinearLayoutManager(RecyclerActivity.this);
+                    recyclerView.setLayoutManager(recyclerViewLayoutManager);
+
+                    recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
+                            getApplicationContext()
+                    ));
+
+                    recyclerViewAdapter = new RecyclerAdapter();
+                    recyclerView.setAdapter(recyclerViewAdapter);
+                } catch (JSONException e){
+                    e.getStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // TODO Auto-generated method stub
+
+            }
+        });
         /*
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -146,6 +144,7 @@ public class RecyclerActivity extends AppCompatActivity {
         // Add the request to the RequestQueue.
         queue.add(jsObjRequest);*/
         MySingleton.getInstance(this).addToRequestQueue(jsObjRequest);
+
     }
 
     public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
