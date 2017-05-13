@@ -76,6 +76,22 @@ public class RecyclerActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        //context = getApplicationContext();
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        //recyclerViewLayoutManager = new LinearLayoutManager(context);
+
+        // use a linear layout manager
+        recyclerViewLayoutManager = new LinearLayoutManager(RecyclerActivity.this);
+        recyclerView.setLayoutManager(recyclerViewLayoutManager);
+
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
+                getApplicationContext()
+        ));
+
+        recyclerViewAdapter = new RecyclerAdapter();
+        recyclerView.setAdapter(recyclerViewAdapter);
+
         //--------------------------Volley Request-----------------------------------//
         final TextView mTextView = (TextView) findViewById(R.id.txtRequest);
         // Instantiate the RequestQueue.
@@ -98,21 +114,8 @@ public class RecyclerActivity extends AppCompatActivity {
                         jsonResponse += year;
                     }
                     mTextView.setText(jsonResponse);
-                    context = getApplicationContext();
 
-                    recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-                    recyclerViewLayoutManager = new LinearLayoutManager(context);
-
-                    // use a linear layout manager
-                    recyclerViewLayoutManager = new LinearLayoutManager(RecyclerActivity.this);
-                    recyclerView.setLayoutManager(recyclerViewLayoutManager);
-
-                    recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
-                            getApplicationContext()
-                    ));
-
-                    recyclerViewAdapter = new RecyclerAdapter();
-                    recyclerView.setAdapter(recyclerViewAdapter);
+                    recyclerViewAdapter.notifyDataSetChanged();
                 } catch (JSONException e){
                     e.getStackTrace();
                 }
@@ -126,25 +129,7 @@ public class RecyclerActivity extends AppCompatActivity {
 
             }
         });
-        /*
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        mTextView.setText("Response is: "+ response.substring(0,500));
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                mTextView.setText("That didn't work!");
-            }
-        });
-        // Add the request to the RequestQueue.
-        queue.add(jsObjRequest);*/
         MySingleton.getInstance(this).addToRequestQueue(jsObjRequest);
-
     }
 
     public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
@@ -166,7 +151,6 @@ public class RecyclerActivity extends AppCompatActivity {
             // Inflate the view for this view holder
             View item = getLayoutInflater().inflate(R.layout.list_item2, parent,
                     false);
-
             // Call the view holder's constructor, and pass the view to it;
             // return that new view holder
             ViewHolder vh = new ViewHolder(item);
