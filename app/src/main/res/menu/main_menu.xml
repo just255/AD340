@@ -17,4 +17,9 @@
         android:icon="@drawable/ic_search"
         app:showAsAction="collapseActionView|ifRoom"
         app:actionViewClass="android.support.v7.widget.SearchView" />
+    <item
+        android:id="@+id/map_menu"
+        android:title="Map"
+        android:icon="@drawable/ic_map_black_24dp"
+        app:showAsAction="always" />
 </menu>

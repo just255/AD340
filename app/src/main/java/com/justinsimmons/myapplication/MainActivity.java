@@ -149,6 +149,10 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(MainActivity.this, RecyclerActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.map_menu:
+                intent = new Intent(MainActivity.this, MapActivity.class);
+                startActivity(intent);
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
